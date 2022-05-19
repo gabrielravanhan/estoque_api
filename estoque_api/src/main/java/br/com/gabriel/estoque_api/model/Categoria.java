@@ -1,6 +1,7 @@
 package br.com.gabriel.estoque_api.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name="categoria")
@@ -10,7 +11,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String nomecurso;
+    private String nomecategoria;
 
     public long getId() {
         return id;
@@ -21,10 +22,23 @@ public class Categoria {
     }
 
     public String getNomecurso() {
-        return nomecurso;
+        return nomecategoria;
     }
 
     public void setNomecurso(String nomecurso) {
-        this.nomecurso = nomecurso;
+        this.nomecategoria = nomecurso;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Categoria categoria = (Categoria) o;
+        return id == categoria.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
