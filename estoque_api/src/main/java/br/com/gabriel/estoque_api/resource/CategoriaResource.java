@@ -37,4 +37,10 @@ public class CategoriaResource {
     public void removerCategoria(@PathVariable long id) {
         categoriaRepository.deleteById(id);
     }
+
+    @PostMapping()
+    public ResponseEntity<Categoria> criarCategoria(@RequestBody Categoria categoria) {
+        Categoria categoriaSalva = categoriaService.salvarCategoria(categoria);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
+    }
 }
