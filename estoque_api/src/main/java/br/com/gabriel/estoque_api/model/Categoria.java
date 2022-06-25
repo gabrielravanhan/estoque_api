@@ -1,10 +1,14 @@
 package br.com.gabriel.estoque_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="categoria")
+@Table(name = "categoria")
 public class Categoria {
 
     @Id
@@ -12,6 +16,10 @@ public class Categoria {
     private long id;
 
     private String nomecategoria;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "categoria")
+    private List<Produto> produtos = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -21,12 +29,20 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getNomecurso() {
+    public String getNomecategoria() {
         return nomecategoria;
     }
 
-    public void setNomecurso(String nomecurso) {
-        this.nomecategoria = nomecurso;
+    public void setNomecategoria(String nomecategoria) {
+        this.nomecategoria = nomecategoria;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     @Override
